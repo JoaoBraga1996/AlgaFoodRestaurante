@@ -1,0 +1,46 @@
+package apiCloneIfood;
+
+import java.util.List;
+
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ApplicationContext;
+
+import apiCloneIfood.domain.model.Cozinha;
+import apiCloneIfood.domain.model.Restaurante;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+import apiCloneIfood.domain.repository.RestauranteRepository;
+
+
+public class ConsultarRestaurante2 {
+
+	public static void main(String[] args) {
+		
+		ApplicationContext apllicantionContext = new SpringApplicationBuilder(ApiBragaApplication.class).web(WebApplicationType.NONE)
+				.run(args);
+		
+		
+		RestauranteRepository cadastro = apllicantionContext.getBean(RestauranteRepository .class);
+		
+		
+		List<Restaurante> restaurantes = cadastro.listar();
+		
+		
+		for (Restaurante restaurante : restaurantes) {
+			System.out.printf("%s - %f - %s/n", restaurante.getNome(), restaurante.getTaxaFrete(), restaurante.getCozinha().getNome());
+			
+		}
+		
+		
+		
+		
+	
+	
+	
+	}
+
+
+	
+     
+	
+}

@@ -1,0 +1,24 @@
+package apiCloneIfood.domain.repository;
+
+import java.util.List;
+
+import apiCloneIfood.domain.model.Cozinha;
+
+public interface CozinhaRepository {
+
+	public List<Cozinha> listar();
+	
+	public List<Cozinha> listarPorNome(String nome);
+
+	public Cozinha adicionar(Cozinha cozinha);
+
+	public Cozinha buscar(Long id);
+
+	public void excluir(Cozinha cozinha);
+		
+		
+		
+		
+	}
+
+

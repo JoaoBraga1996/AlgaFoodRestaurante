@@ -1,0 +1,49 @@
+package apiCloneIfood.controller;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import apiCloneIfood.domain.model.Cozinha;
+import apiCloneIfood.domain.model.Restaurante;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+import apiCloneIfood.domain.repository.RestauranteRepository;
+
+@RestController
+@RequestMapping("/teste")
+public class TesteController {
+	
+	@Autowired
+	CozinhaRepository cozinhaRepository;
+	
+	@Autowired
+	RestauranteRepository restauranteRepository;
+	
+ 
+	
+ @GetMapping("/cozinha/por-nome")
+  List<Cozinha> cozinhaPornome (String nome){
+	  
+	  return cozinhaRepository.findTodosBynomeContaining(nome);
+	  
+  }
+ 
+@GetMapping("/restaurante/taxa-por-frete")
+ List<Restaurante> restaurantesPorTaxaFrete (BigDecimal taxaInicial, BigDecimal taxaFinal){
+	 
+	    return restauranteRepository.findByTaxaFreteBetween(taxaInicial, taxaFinal);
+	  
+	  
+	  
+}
+ 
+
+	  
+	  
+}
+	
+

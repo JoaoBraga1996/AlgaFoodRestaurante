@@ -1,0 +1,26 @@
+package apiCloneIfood.domain.repository;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import apiCloneIfood.domain.model.Cidade;
+@Repository
+public interface CidadeRepository {
+
+	
+
+	public List<Cidade> listar();
+
+	public Cidade adicionar(Cidade cidade);
+
+	public Cidade buscar(long id);
+
+	public void excluir(Cidade cidade);
+		
+		
+		
+		
+	}
+
+

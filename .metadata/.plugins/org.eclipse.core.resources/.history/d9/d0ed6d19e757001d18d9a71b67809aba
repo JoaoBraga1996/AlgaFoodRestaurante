@@ -1,0 +1,30 @@
+insert into cozinha (id, nome) values (1, 'Tailandesa');
+insert into cozinha (id, nome) values (2, 'Indiana');
+
+
+insert into restaurante (nome, taxafrete, cozinha_id) values ('Thai Goumert', 10.00, 1);
+insert into restaurante (nome, taxafrete, cozinha_id) values ('Thai Delirery', 9.50, 1);
+insert into restaurante (nome, taxafrete, cozinha_id) values ('Tuk Tuk Comida Indiana', 15.00, 2);
+
+
+
+insert into cidade (id, nome) values (1, 'Uberlandia');
+insert into cidade (id, nome) values (2, 'Ribeirão Preto');
+insert into cidade (id, nome) values (3, 'Fortaleza');
+
+
+insert into estado (nome, cidade_id) values ('Minas Gerais', 1);
+insert into estado (nome, cidade_id) values ('São Paulo', 2);
+insert into estado (nome, cidade_id) values ('Minas Gerais', 3);
+
+
+
+
+
+
+
+
+
+
+
+

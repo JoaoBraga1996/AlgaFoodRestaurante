@@ -1,0 +1,72 @@
+package apiCloneIfood.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import apiCloneIfood.domain.model.Restaurante;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+import apiCloneIfood.domain.repository.RestauranteRepository;
+
+@RestController
+@RequestMapping("/teste")
+public class TesteController {
+
+	@Autowired
+	RestauranteRepository restauranteRepository;
+
+	@Autowired
+	CozinhaRepository cozinhaRepository;
+
+	@GetMapping("/restaurantes/primeiro-por-nome")
+	public Optional<Restaurante> restaurantePorNome(String nome) {
+
+		return restauranteRepository.findFirstRestauranteByNomeContaining(nome);
+	}
+
+	@GetMapping("/restaurantes/primeiro-por-nome2")
+	public List<Restaurante> restaurantePorNome2(String nome) {
+
+		return restauranteRepository.findTop2RestauranteByNomeContaining(nome);
+	}
+
+	@GetMapping("/cozinhas/exists")
+	public boolean cozinhaExists(String nome) {
+
+		return cozinhaRepository.existsBynome(nome);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+//@GetMapping("/restaurantes/primeiro-por-query")
+//public List<Restaurante> restauranteporquery(String nome, Long cozinhaId){
+//	
+//	return  restauranteRepository.consultarporNome(nome, cozinhaId);
+
+// não funcionou ver depois
+//@GetMapping("/restaurantes/count-por-cozinha")
+//public int restauranteCountporCozinha(Long cozinhaId){
+//	
+//	return  restauranteRepository.countByCozinhaId(cozinhaId);
+//}
+
+}

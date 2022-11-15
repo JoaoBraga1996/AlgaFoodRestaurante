@@ -1,0 +1,5 @@
+package apiCloneIfood.insfracture.repository;
+
+public class RestauranteRepositoryImpl {
+
+}

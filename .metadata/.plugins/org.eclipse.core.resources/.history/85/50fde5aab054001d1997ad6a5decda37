@@ -1,0 +1,5 @@
+package apiCloneIfood.domain.services;
+
+public class EstadoService {
+
+}

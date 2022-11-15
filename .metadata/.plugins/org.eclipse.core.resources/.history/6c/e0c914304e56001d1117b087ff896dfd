@@ -1,0 +1,72 @@
+package apiCloneIfood.controller;
+import org.apache.el.stream.Optional;
+import java.util.List;
+
+import org.apache.el.stream.Optional;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import apiCloneIfood.domain.model.Cozinha;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+import apiCloneIfood.domain.services.CozinhaServices;
+
+@RestController
+@RequestMapping("/cozinha")
+
+public class CozinhaController {
+
+	@Autowired
+	private CozinhaServices cozinhaServices;
+
+	
+	@Autowired
+	CozinhaRepository cozinhaRepository;
+	@GetMapping
+	public List<Cozinha> listar() {
+		return   cozinhaRepository.findAll();
+
+	}
+   
+	
+	@GetMapping("/{cozinhaId}")
+	public Cozinha buscar(@PathVariable long cozinhaId) {
+		Optional<Cozinha> cozinha = cozinhaRepository.findById(cozinhaId);
+		
+
+	}
+
+
+
+
+	@PostMapping
+	public void adicionar(@RequestBody Cozinha cozinha) {
+		cozinhaServices.adicionar(cozinha);
+	}
+
+	@PutMapping("/{cozinhaId}")
+	public void atualizar(@PathVariable long cozinhaId, @RequestBody Cozinha cozinha) {
+
+		Cozinha cozinhaAtual = cozinhaServices.buscar(cozinhaId);
+
+		BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
+
+		cozinhaServices.adicionar(cozinhaAtual);
+
+	}
+
+	@DeleteMapping("/{cozinhaId}")
+	public void deletar(@PathVariable long cozinhaId) {
+		Cozinha cozinha = buscar(cozinhaId);
+
+		cozinhaServices.deletar(cozinha);
+
+	}
+}

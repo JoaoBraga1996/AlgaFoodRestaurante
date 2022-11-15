@@ -1,0 +1,30 @@
+package apiCloneIfood.domain.repository;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import apiCloneIfood.domain.model.Restaurante;
+
+@Repository
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+  
+	Optional<Restaurante> findFirstRestauranteByNomeContaining(String nome);
+ 
+	
+	List<Restaurante> findTop2RestauranteByNomeContaining(String nome);
+	
+//	int countByCozinhaId(Long cozinha); não funcionou ver depois
+	
+	
+	
+//	@Query("From Restaurante where nome like %:nome% and cozinha.Id = cozinhaId")
+//	List<Restaurante> consultarporNome(String nome, Long cozinhaId);
+	
+
+   
+}
+
+

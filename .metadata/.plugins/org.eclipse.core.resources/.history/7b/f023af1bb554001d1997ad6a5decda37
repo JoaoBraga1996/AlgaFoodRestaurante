@@ -1,0 +1,43 @@
+package apiCloneIfood.insfracture.repository;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import apiCloneIfood.domain.model.Cidade;
+
+@Repository
+public class CidadeRepositoryImp {
+
+	@PersistenceContext
+	private EntityManager manager;
+
+	public List<Cidade> listar() {
+		return manager.createQuery("from Cidade", Cidade.class).getResultList();
+
+	}
+
+	@Transactional
+	public Cidade adicionar(Cidade cidade) {
+
+		return manager.merge(cidade);
+	}
+
+	public Cidade buscar(long id) {
+
+		return manager.find(Cidade.class, id);
+	}
+
+	@Transactional
+
+	public void excluir(Cidade cidade) {
+
+		manager.remove(cidade);
+
+	}
+
+}

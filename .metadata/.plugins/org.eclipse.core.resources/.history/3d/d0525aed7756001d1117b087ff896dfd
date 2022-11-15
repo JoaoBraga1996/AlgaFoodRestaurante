@@ -1,0 +1,93 @@
+package apiCloneIfood.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import apiCloneIfood.domain.model.Cidade;
+import apiCloneIfood.domain.repository.CidadeRepository;
+import apiCloneIfood.domain.services.CidadeService;
+
+@RestController
+@RequestMapping("/cidade")
+public class CidadeController {
+
+	@Autowired
+	private CidadeService cidadeService;
+	
+	@Autowired
+	CidadeRepository cidadeRepository;
+
+	@GetMapping
+	public List<Cidade> listar() {
+		return cidadeService.listar();
+
+	}
+
+	@GetMapping("/{cidadeId}")
+	public ResponseEntity<Cidade> buscar(@PathVariable long cidadeId) {
+
+		Optional<Cidade> cidadeAtual = cidadeRepository.findById(cidadeId);
+		
+		if(cidadeAtual.isPresent()) {
+			return ResponseEntity.ok(cidadeAtual.get());
+		}
+        
+		return ResponseEntity.notFound().build();
+	}
+
+	@PostMapping
+	public void adicionar(@RequestBody Cidade cidade) {
+		cidadeService.adicionar(cidade);
+	}
+
+	@PutMapping("/{cidadeId}")
+	public ResponseEntity<Cidade> atualizar(@PathVariable long cidadeId, @RequestBody Cidade cidade) {
+
+		Optional<Cidade> cidadeAtual = cidadeRepository.findById(cidadeId);
+		if(cidadeAtual.isPresent()) {
+			
+		
+
+		BeanUtils.copyProperties(cidade, cidadeAtual.get(), "id");
+
+		
+		Cidade cidadeComum = cidadeService.adicionar(cidadeAtual.get());
+		
+		return ResponseEntity.ok(cidadeComum);
+		
+		}
+            return ResponseEntity.notFound().build();
+	}
+
+	@DeleteMapping("/{cidadeId}")
+	public ResponseEntity<Cidade> deletar(@PathVariable long estadoId) {
+		try {
+			cidadeService.deletar(estadoId);
+
+			return ResponseEntity.noContent().build();
+		}
+
+		catch (EntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
+
+		} catch (DataIntegrityViolationException e) {
+			return ResponseEntity.badRequest().build();
+		}
+
+}
+}

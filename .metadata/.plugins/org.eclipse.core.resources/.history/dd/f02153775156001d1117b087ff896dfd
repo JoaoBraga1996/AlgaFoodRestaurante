@@ -1,0 +1,53 @@
+package apiCloneIfood.domain.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import apiCloneIfood.domain.model.Cozinha;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+
+@Service
+public class CozinhaServices {
+	
+	
+	@Autowired
+	private CozinhaRepository cozinhaRepository;
+	
+	
+	public List<Cozinha> listar(){
+		return cozinhaRepository.listar();
+		
+}	
+	
+ public Cozinha buscar(Long id) {
+	 
+	 return cozinhaRepository.buscar(id);
+	 
+ }
+ 
+ public Cozinha adicionar(Cozinha cozinha) {
+	  return cozinhaRepository.adicionar(cozinha);
+ }
+ 
+ public void deletar(Cozinha cozinha) {
+	 
+	 cozinhaRepository.excluir(cozinha);
+ }
+	 
+	 
+	 
+	 
+ }
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+

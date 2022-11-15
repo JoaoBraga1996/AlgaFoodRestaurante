@@ -1,0 +1,55 @@
+package apiCloneIfood.domain.services;
+
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import apiCloneIfood.domain.model.Cozinha;
+import apiCloneIfood.domain.model.Restaurante;
+import apiCloneIfood.domain.repository.CozinhaRepository;
+import apiCloneIfood.domain.repository.RestauranteRepository;
+
+@Service
+public class RestauranteService {
+
+	@Autowired
+	private RestauranteRepository restauranteRepository;
+
+	@Autowired
+	private CozinhaRepository cozinhaRepository;
+
+	public List<Restaurante> listar() {
+		return restauranteRepository.findAll();
+
+	}
+
+	public Restaurante salvar(Restaurante restaurante) {
+		long cozinhaId = restaurante.getCozinha().getId();
+		Cozinha cozinha = cozinhaRepository.findById(cozinhaId).orElseThrow(() -> new EntityNotFoundException()); 
+		
+		restaurante.setCozinha(cozinha);
+		
+		return restauranteRepository.save(restaurante);
+		
+	}
+
+	public void deletar(long restauranteId) {
+		try {
+			restauranteRepository.deleteById(restauranteId);
+
+		} catch (EntityNotFoundException e) {
+			e.getMessage();
+		} catch (DataIntegrityViolationException e) {
+			e.getMessage();
+		}
+
+	}
+	
+	
+	
+
+}

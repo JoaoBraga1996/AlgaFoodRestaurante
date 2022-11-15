@@ -1,0 +1,13 @@
+package apiCloneIfood.domain.repository;
+
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import apiCloneIfood.domain.model.Cozinha;
+
+public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
+	
+}
+
+

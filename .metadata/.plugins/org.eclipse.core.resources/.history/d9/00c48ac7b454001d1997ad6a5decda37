@@ -1,0 +1,5 @@
+package apiCloneIfood.domain.repository;
+
+public interface CidadeRepository {
+
+}

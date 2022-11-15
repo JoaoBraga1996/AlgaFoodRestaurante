@@ -1,0 +1,39 @@
+package apiCloneIfood.domain.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import apiCloneIfood.domain.model.Cidade;
+import apiCloneIfood.domain.repository.CidadeRepository;
+@Service
+public class CidadeService {
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
+	
+	
+	public List<Cidade> listar(){
+		return cidadeRepository.listar();
+		
+}	
+	
+ public Cidade buscar(long id) {
+	 
+	 return cidadeRepository.buscar(id);
+	 
+ }
+ 
+ public void adicionar(Cidade cidade) {
+	 cidadeRepository.adicionar(cidade);
+ }
+ 
+ public void deletar(Cidade cidade) {
+	 
+	 cidadeRepository.excluir(cidade);
+ }
+
+}
+
+

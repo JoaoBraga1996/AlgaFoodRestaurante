@@ -1,0 +1,31 @@
+package apiCloneIfood.domain.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import apiCloneIfood.domain.model.Estado;
+import apiCloneIfood.domain.repository.EstadoRepository;
+
+@Service
+public class EstadoService {
+
+	@Autowired
+	private EstadoRepository estadoRepository;
+
+	public List<Estado> listar() {
+		return estadoRepository.findAll();
+
+	}
+
+	public void adicionar(Estado estado) {
+		estadoRepository.save(estado);
+	}
+
+	public void deletar(Estado estado) {
+
+		estadoRepository.delete(estado);
+	}
+
+}

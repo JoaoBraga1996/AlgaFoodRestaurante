@@ -1,0 +1,5 @@
+package apiCloneIfood.domain.model.exception;
+
+public class EntidadeNaoEncontradaException {
+
+}

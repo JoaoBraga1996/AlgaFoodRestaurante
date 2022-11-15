@@ -1,0 +1,39 @@
+package apiCloneIfood.domain.services;
+
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import apiCloneIfood.domain.model.Cidade;
+import apiCloneIfood.domain.repository.CidadeRepository;
+
+@Service
+public class CidadeService {
+
+	@Autowired
+	private CidadeRepository cidadeRepository;
+
+	public List<Cidade> listar() {
+		return cidadeRepository.findAll();
+
+	}
+
+	public void adicionar(Cidade cidade) {
+		cidadeRepository.save(cidade);
+	}
+
+	public void deletar(long cidadeId) {
+		try {
+			 cidadeRepository.deleteById(cidadeId);
+
+		} catch (EntityNotFoundException e) {
+			e.getMessage();
+		} catch (DataIntegrityViolationException e) {
+			e.getMessage();
+		}
+
+}
